@@ -1,0 +1,16 @@
+root = true
+
+[*]
+# Biome default
+charset = utf-8
+insert_final_newline = true
+end_of_line = lf
+max_line_length = 80
+trim_trailing_whitespace = true
+indent_style = tab
+# Use tabs: https://alexandersandberg.com/articles/default-to-tabs-instead-of-spaces-for-an-accessible-first-environment/
+
+[*.{yml,yaml}]
+# YAML disallows tabs
+indent_size = 2
+indent_style = space

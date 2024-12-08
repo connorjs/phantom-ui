@@ -1,0 +1,104 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	// https://biomejs.dev/reference/configuration/
+	"files": {
+		"ignoreUnknown": true
+	},
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true,
+		"defaultBranch": "main"
+	},
+	"formatter": {
+		"useEditorconfig": true
+	},
+	"linter": {
+		"rules": {
+			// I prefer turning off rules (or downgrading to info) so that I can learn about new ones.
+			// Last checked 2024-12-07 with version 1.9.4.
+			"all": true,
+			"complexity": {},
+			"correctness": {
+				// Build scripts may use node imports.
+				"noNodejsModules": "off"
+			},
+			"nursery": {
+				// Undo the top-level `all` for nursey rules.
+				"all": false,
+				// Stylelint rule.
+				"noDescendingSpecificity": "error",
+				// Stylelint rule.
+				"noDuplicateCustomProperties": "error",
+				// Stylelint rule.
+				"noDuplicateProperties": "error",
+				// Various reasons to not use. I like the articles collected by Sheriff.
+				// https://www.eslint-config-sheriff.dev/docs/core-philosophy/stylistic-choices#no-enums
+				"noEnum": "error",
+				// Stylelint rule.
+				"noMissingVarFunction": "error",
+				// Improve code readability.
+				// Even in React code, where many argue it helps, using guard blocks yields easier-to-read code.
+				"noNestedTernary": "error",
+				// General application code should not access env variable directly.
+				"noProcessEnv": "error",
+				// Accessibility.
+				"noStaticElementInteractions": "error",
+				// JS best practice.
+				"noSubstr": "error",
+				// Stylelint rule.
+				"noUnknownPseudoClass": "error",
+				// Stylelint rule.
+				"noUnknownTypeSelector": "error",
+				// Stylelint rule.
+				"noUnknownPseudoElement": "error",
+				// Helps react refresh (HMR) development experience.
+				"useComponentExportOnlyModules": "error",
+				// Consistency.
+				"useConsistentCurlyBraces": "error",
+				// Direction-independent.
+				"useTrimStartEnd": "error"
+			},
+			"style": {
+				// Similar to C# primary constructors, so allow it.
+				"noParameterProperties": "off",
+				// Kebab-case files
+				"useFilenamingConvention": {
+					"level": "error",
+					"options": {
+						"requireAscii": true,
+						"filenameCases": ["kebab-case"]
+					}
+				}
+			},
+			"suspicious": {
+				// We use React.
+				"noReactSpecificProps": "off"
+			}
+		}
+	},
+	"overrides": [
+		{
+			"include": ["**/*.config.ts"],
+			"linter": {
+				"rules": {
+					"style": {
+						// Many configurations require default export
+						"noDefaultExport": "off"
+					}
+				}
+			}
+		},
+		{
+			"include": ["**/*.test.ts"],
+			"linter": {
+				"rules": {
+					"style": {
+						// Tests are safe to use `!` (they will fail if an issue)
+						"noNonNullAssertion": "off"
+					}
+				}
+			}
+		}
+	]
+}
