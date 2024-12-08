@@ -7,5 +7,5 @@
 			"~/*": ["./website/src/*"]
 		}
 	},
-	"include": ["website"]
+	"include": ["*.ts", "website"]
 }

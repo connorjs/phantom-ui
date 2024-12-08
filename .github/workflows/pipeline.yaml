@@ -16,11 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Use .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          global-json-file: global.json
-
       - name: Use pnpm
         uses: pnpm/action-setup@v4
 
