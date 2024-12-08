@@ -1,0 +1,11 @@
+{
+	"extends": "@connorjs/tsconfig/app/tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"outDir": "./artifacts/tsc",
+		"paths": {
+			"~/*": ["./website/src/*"]
+		}
+	},
+	"include": ["website"]
+}

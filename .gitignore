@@ -1,0 +1,8 @@
+# Repository-driven (keep it limited to exactly what is needed)
+artifacts/
+dist/
+node_modules/
+
+# Personal tools (feel free to add your own)
+*.local
+.idea/
