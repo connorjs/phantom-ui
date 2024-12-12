@@ -1,4 +1,5 @@
 import path from "node:path";
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import react from "@vitejs/plugin-react-swc";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
@@ -12,7 +13,19 @@ export default defineConfig({
 
 	cacheDir: path.join(artifacts, "vite"),
 
-	plugins: [react(), tsconfigPaths()],
+	css: {
+		modules: {
+			localsConvention: "dashesOnly",
+		},
+
+		preprocessorOptions: {
+			scss: {
+				api: "modern-compiler",
+			},
+		},
+	},
+
+	plugins: [vanillaExtractPlugin(), react(), tsconfigPaths()],
 
 	root: "website",
 

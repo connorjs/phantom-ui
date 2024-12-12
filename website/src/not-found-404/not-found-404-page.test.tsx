@@ -5,6 +5,6 @@ import { NotFound404Page } from "./not-found-404-page.tsx";
 describe("not-found-404-page", () => {
 	it("should say not found", () => {
 		render(<NotFound404Page />);
-		expect(screen.getByText("Page not found.")).toBeInTheDocument();
+		expect(screen.getByText("Page not found")).toBeInTheDocument();
 	});
 });
