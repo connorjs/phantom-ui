@@ -1,0 +1,33 @@
+$my-font-family: ("Nunito Sans", Roboto, Arial, sans-serif, "Segoe UI Symbol", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji");
+
+@use "@progress/kendo-theme-default/scss/all" as * with (
+  // Enable Kendo typography
+  $kendo-enable-typography: true,
+
+  // Configure font family
+  $kendo-font-family: $my-font-family,
+  // TODO: $kendo-font-family-monospace
+
+  // Use it for the specific variables (I do not know why Kendo has `sans` and `sans-serif` variables)
+  $kendo-font-family-sans: $my-font-family,
+  $kendo-font-family-serif: $my-font-family,
+  $kendo-font-family-sans-serif: $my-font-family,
+
+  // Redfine font weights with all values
+  $kendo-font-weights: (
+    thin: 100,
+    extralight: 200,
+    light: 300,
+    normal: 400,
+    medium: 500,
+    semibold: 600,
+    bold: 700,
+    extrabold: 800,
+    heavy: 900,
+  )
+);
+
+input::placeholder,
+textarea::placeholder {
+  font-style: italic;
+}
