@@ -1,16 +1,14 @@
 import path from "node:path";
+import { reactRouter } from "@react-router/dev/vite";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
-import react from "@vitejs/plugin-react-swc";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
 
-const artifacts = path.join(import.meta.dirname, "artifacts");
+const artifacts = "artifacts";
+const coverage = path.join(artifacts, "coverage");
+const testResults = path.join(artifacts, "test-results");
 
 export default defineConfig({
-	build: {
-		outDir: path.join(artifacts, "dist"),
-	},
-
 	cacheDir: path.join(artifacts, "vite"),
 
 	css: {
@@ -25,9 +23,7 @@ export default defineConfig({
 		},
 	},
 
-	plugins: [vanillaExtractPlugin(), react(), tsconfigPaths()],
-
-	root: "website",
+	plugins: [vanillaExtractPlugin(), reactRouter(), tsconfigPaths()],
 
 	test: {
 		environmentMatchGlobs: [["**/*.tsx", "happy-dom"]],
@@ -36,13 +32,10 @@ export default defineConfig({
 
 		reporters: [
 			"dot",
-			[
-				"junit",
-				{ outputFile: path.join(artifacts, "test-results", "junit.xml") },
-			],
+			["junit", { outputFile: path.join(testResults, "junit.xml") }],
 		],
 
-		setupFiles: ["./vitest-setup.ts"],
+		setupFiles: [path.join(import.meta.dirname, "vitest-setup.ts")],
 
 		coverage: {
 			include: ["**/src"],
@@ -51,14 +44,9 @@ export default defineConfig({
 				["cobertura", { file: "cobertura.xml" }],
 				["html", { subdir: "html" }],
 			],
-			reportsDirectory: path.join(artifacts, "coverage"),
+			reportsDirectory: coverage,
 
-			thresholds: {
-				branches: 80,
-				functions: 80,
-				lines: 80,
-				perFile: true,
-			},
+			thresholds: { branches: 80, functions: 80, lines: 80, perFile: true },
 		},
 	},
 });
