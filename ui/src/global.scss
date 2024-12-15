@@ -1,0 +1,22 @@
+$regular-font-family: ("Nunito Sans", Roboto, Arial, sans-serif, "Segoe UI Symbol", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji");
+$monospace-font-family: ("JetBrains Mono", monospace, "Segoe UI Symbol", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji");
+
+@use "@progress/kendo-theme-default/scss/all" as * with (
+  // Enable Kendo typography
+  $kendo-enable-typography: true,
+
+  // Configure font family
+  $kendo-font-family: $regular-font-family,
+  $kendo-font-family-monospace: $monospace-font-family,
+
+  // Use it for the specific variables (I do not know why Kendo has `sans` and `sans-serif` variables)
+  $kendo-font-family-sans: $regular-font-family,
+  $kendo-font-family-serif: $regular-font-family,
+  $kendo-font-family-sans-serif: $regular-font-family,
+);
+
+// Italicize placeholders
+input::placeholder,
+textarea::placeholder {
+  font-style: italic;
+}

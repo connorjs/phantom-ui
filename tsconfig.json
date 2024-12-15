@@ -4,8 +4,9 @@
 		"baseUrl": ".",
 		"outDir": "./artifacts/tsc",
 		"paths": {
+			"~/ui/*": ["./ui/src/*"],
 			"~/*": ["./website/src/*"]
 		}
 	},
-	"include": ["*.ts", "website"]
+	"include": ["*.ts", "ui", "website"]
 }

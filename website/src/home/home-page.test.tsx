@@ -5,6 +5,6 @@ import { HomePage } from "./home-page.tsx";
 describe("home-page", () => {
 	it("should say hello", () => {
 		render(<HomePage />);
-		expect(screen.getByText("Hello, world!")).toBeInTheDocument();
+		expect(screen.getByText("Welcome to Phantom UI")).toBeInTheDocument();
 	});
 });
