@@ -6,8 +6,7 @@
 		"paths": {
 			"~/ui/*": ["./ui/src/*"],
 			"~/*": ["./website/src/*"]
-		},
-		"rootDirs": [".", ".react-router/types"]
+		}
 	},
-	"include": ["website/src", "ui", ".react-router/types/**/*", "*.ts"]
+	"include": ["*.ts", "ui", "website"]
 }

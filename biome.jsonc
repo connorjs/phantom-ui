@@ -79,33 +79,17 @@
 	},
 	"overrides": [
 		{
-			// Config files have certain conventions.
 			"include": ["**/*.config.ts"],
 			"linter": {
 				"rules": {
 					"style": {
+						// Many configurations require default export
 						"noDefaultExport": "off"
 					}
 				}
 			}
 		},
 		{
-			// Route files have certain requirements.
-			// https://reactrouter.com/start/framework/route-module
-			"include": ["**/src/root.tsx", "**/src/routes.ts", "**/src/routes/*.tsx"],
-			"linter": {
-				"rules": {
-					"nursery": {
-						"useComponentExportOnlyModules": "off" // May export additional information such as `links` and `meta`.
-					},
-					"style": {
-						"noDefaultExport": "off" // Must default export for code splitting.
-					}
-				}
-			}
-		},
-		{
-			// Relax some rules for tests.
 			"include": ["**/*.test.ts"],
 			"linter": {
 				"rules": {

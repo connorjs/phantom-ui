@@ -2,7 +2,6 @@
 artifacts/
 dist/
 node_modules/
-.react-router/
 kendo-ui-license.txt
 
 # Personal tools (feel free to add your own)

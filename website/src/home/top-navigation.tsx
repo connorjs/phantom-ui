@@ -8,9 +8,8 @@ import {
 	Avatar,
 } from "@progress/kendo-react-layout";
 import { menuIcon, searchIcon } from "@progress/kendo-svg-icons";
-import { NavLink } from "react-router";
 import { FlexRow } from "~/home/flex.tsx";
-import { actions, topNav } from "./top-navigation.css.ts";
+import { actions, topNav } from "./top-navigation.css";
 
 export function TopNavigation() {
 	return (
@@ -47,16 +46,16 @@ function TopNavigationActions() {
 	return (
 		<ul className={actions}>
 			<li>
-				<NavLink to="/foundation">Foundation</NavLink>
+				<a href="/foundation">Foundation</a>
 			</li>
 			<li>
-				<NavLink to="/patterns">Patterns</NavLink>
+				<a href="/patterns">Patterns</a>
 			</li>
 			<li>
-				<NavLink to="/components">Components</NavLink>
+				<a href="/components">Components</a>
 			</li>
 			<li>
-				<NavLink to="/demos">Demos</NavLink>
+				<a href="/demos">Demos</a>
 			</li>
 		</ul>
 	);

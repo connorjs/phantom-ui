@@ -1,5 +1,3 @@
-/* c8 ignore start -- Verified with browser tests. */
-
 import { enableKendoTypography } from "./enable-kendo-typography.ts";
 import { loadFonts } from "./load-fonts.ts";
 
@@ -13,5 +11,3 @@ export function initializePhantomUi() {
 	loadFonts();
 	enableKendoTypography();
 }
-
-/* c8 ignore stop -- END */
