@@ -10,6 +10,8 @@ jobs:
   Build:
     name: Build
     runs-on: ubuntu-latest
+    env:
+      KENDO_UI_LICENSE: ${{ secrets.KENDO_UI_LICENSE }}
     permissions:
       pull-requests: write
     steps:
@@ -28,8 +30,40 @@ jobs:
       - name: Restore
         run: pnpm install
 
+      - name: Activate
+        run: pnpm exec kendo-ui-license activate
+
       - name: Build
-        run: npm run build:release
+        run: pnpm run build:release
 
       - name: Test
-        run: npm run test:release
+        run: pnpm run test:release
+
+      - name: Upload artifact
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: artifacts/dist
+
+  Deploy:
+    # https://github.com/actions/deploy-pages
+    name: Deploy
+    if: github.ref == 'refs/heads/main'
+    needs: Build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

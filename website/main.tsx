@@ -12,7 +12,7 @@ initializePhantomUi();
 // biome-ignore lint/style/noNonNullAssertion: See index.html
 const root = document.getElementById("root")!;
 
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter(routes, { basename: "/phantom-ui/" });
 
 createRoot(root).render(
 	<StrictMode>
