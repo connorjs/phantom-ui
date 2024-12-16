@@ -7,6 +7,8 @@ import { defineConfig } from "vitest/config";
 const artifacts = path.join(import.meta.dirname, "artifacts");
 
 export default defineConfig({
+	base: "/phantom-ui/",
+
 	build: {
 		outDir: path.join(artifacts, "dist"),
 	},

@@ -8,6 +8,11 @@ I also expect an Issue created and discussed prior to a pull request.
 
 Feel free to use Discussions to chat about ideas, too.
 
+## Prerequisites
+
+You need a Telerik Kendo UI React license.
+Without one, the application will have watermarks.
+
 ## Getting started
 
 - Node (I recommend using [fnm](https://fnm.vercel.app/))
