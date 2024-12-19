@@ -20,7 +20,7 @@
 		"tsc": "tsc --build",
 		"——————————————————————————— vite ———————————————————————————": "",
 		"vite": "vite build",
-		"postvite": "shx cp artifacts/dist/index.html website/dist/404.html",
+		"postvite": "shx cp artifacts/dist/index.html artifacts/dist/404.html",
 		"—————————————————————————— vitest ——————————————————————————": "",
 		"vitest": "vitest run --coverage",
 		"—————————————————————— Custom scripts ——————————————————————": "",
