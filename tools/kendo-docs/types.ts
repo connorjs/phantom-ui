@@ -11,12 +11,12 @@ import { Node } from "ts-morph";
  * Named “Props node” to signify their main use: documenting properties.
  * These also represent the supporting types.
  */
-export type PropsNode = InterfaceDeclaration | TypeAliasDeclaration;
+export type TypeNode = InterfaceDeclaration | TypeAliasDeclaration;
 
 /**
- * Gets if node is one of our {@link PropsNode}.
+ * Gets if node is one of our {@link TypeNode}.
  */
-export function isPropsNode(node: Node) {
+export function isTypeNode(node: Node) {
 	return Node.isInterfaceDeclaration(node) || Node.isTypeAliasDeclaration(node);
 }
 
@@ -29,7 +29,7 @@ export function isPropsNode(node: Node) {
 export type ComponentNode = VariableStatement;
 
 /**
- * Gets if node is one of our {@link PropsNode}.
+ * Gets if node is one of our {@link TypeNode}.
  */
 export function isComponentNode(node: Node) {
 	return Node.isVariableStatement(node);
@@ -38,32 +38,53 @@ export function isComponentNode(node: Node) {
 /**
  * Record of names to nodes.
  */
-export type DocumentationDictionary = Record<string, DocumentedNode>;
+export type DocumentationDictionary = Record<string, DocumentedType>;
 
-/**
- * Our representation of a documented node.
- */
-export type DocumentedNode = {
+// Shared fields
+type Documented = {
 	/**
 	 * The name of the node.
 	 *
-	 * Think property or type name.
+	 * Think type name.
 	 */
 	name: string;
 
 	/**
-	 * The ready-to-display description as markdown.
+	 * The description as markdown.
 	 *
 	 * This has run through transforms that prepare it for display.
 	 * Think normalizing content, removing or resolving Kendo-specific syntax, or other modifications.
 	 */
 	description: string | undefined;
+};
 
+/**
+ * Our representation of a documented type (includes interface).
+ */
+export type DocumentedType = Documented &
+	(
+		| {
+				/**
+				 * The properties of the type.
+				 *
+				 * Undefined implies type aliases (think `type X = "a" | "b"`).
+				 */
+				properties: DocumentedProperty[] | undefined;
+		  }
+		| {
+				/**
+				 * The types for this type alias.
+				 */
+				type: string;
+		  }
+	);
+
+/**
+ * Our representation of a documented property.
+ */
+export type DocumentedProperty = Documented & {
 	/**
-	 * The raw description as markdown.
-	 *
-	 * This comes from the JSDoc.
-	 * It includes Kendo’s formatting
+	 * The type of the property.
 	 */
-	//rawDescription: string | undefined;
+	type: string;
 };
