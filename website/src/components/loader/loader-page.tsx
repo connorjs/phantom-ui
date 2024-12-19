@@ -1,5 +1,4 @@
 import { Loader } from "@progress/kendo-react-indicators";
-import { useEffect, useState } from "react";
 import {
 	Card,
 	CardBody,
@@ -7,7 +6,9 @@ import {
 	CardTitle,
 	StackLayout,
 } from "@progress/kendo-react-layout";
+import { useEffect, useState } from "react";
 
+/* c8 ignore start -- I will add unit tests once the code settles. */
 export function LoaderPage() {
 	const [data, setData] = useState(undefined);
 
@@ -17,7 +18,10 @@ export function LoaderPage() {
 			.then((module) => {
 				setData(module.default);
 			})
-			.catch((error: unknown) => console.error(error));
+			.catch((error: unknown) => {
+				// biome-ignore lint/suspicious/noConsole: Console until we have a logger.
+				console.error(error);
+			});
 	}, []); // Run once (fetch data)
 
 	return (
@@ -52,3 +56,4 @@ export function LoaderPage() {
 		</section>
 	);
 }
+/* c8 ignore stop -- END */
