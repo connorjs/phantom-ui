@@ -1,7 +1,7 @@
 # Repository-driven (keep it limited to exactly what is needed)
 artifacts/
 dist/
-generated/
+generated-src/
 node_modules/
 kendo-ui-license.txt
 

@@ -9,7 +9,13 @@ const workspaceRoot = path.resolve(
 	"..", // tools
 	"..", // workspace root
 );
-const nodeModulesPath = path.join(workspaceRoot, "node_modules");
+const nodeModulesRoot = path.join(workspaceRoot, "node_modules");
+const destinationRoot = path.join(
+	workspaceRoot,
+	"website",
+	"generated-src",
+	"kendo-docs",
+);
 
 // Create a project with no configuration
 const project = new Project();
@@ -22,7 +28,7 @@ const sourceFiles = moduleNames.map(
 			moduleName,
 			project.addSourceFileAtPath(
 				path.join(
-					nodeModulesPath,
+					nodeModulesRoot,
 					"@progress",
 					`kendo-react-${moduleName}`,
 					"index.d.mts",
@@ -42,7 +48,7 @@ await Promise.all(
 	documentationDictionaries.map(([moduleName, documentationDictionary]) =>
 		writeDocumentationModel(
 			project,
-			path.join(workspaceRoot, "generated", "kendo-docs", `${moduleName}.js`),
+			path.join(destinationRoot, `${moduleName}.js`),
 			documentationDictionary,
 		),
 	),

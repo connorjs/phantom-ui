@@ -35,7 +35,7 @@ function translateProperty(property: PropertySignature): DocumentedProperty {
 	return {
 		name: property.getName(),
 		description: extractJsDoc(property),
-		type: property.getType().getText(),
+		type: getType(property),
 	} satisfies DocumentedProperty;
 }
 
@@ -56,7 +56,7 @@ function getPropertyNodesOrUnionType(node: TypeNode) {
 				// But we still want the union type.
 				return child
 					.getTypeNodes()
-					.map((node) => node.getText())
+					.map((node) => getType(node))
 					.join(" | ")
 					.replaceAll("'", '"');
 			}
@@ -85,5 +85,22 @@ function normalizeJsDoc(s: string) {
 }
 
 // Future idea: Remove or resolve Kendo slug links.
+
+//#endregion
+
+//#region Type extraction and transforms
+
+function getType(node: Node) {
+	const rawType = node.getType().getText();
+	return normalizeImportType(rawType);
+}
+
+// RegExp for the import syntax. If the import ends in `index` also remove that.
+const importRegex = /import\(".*?node_modules\/(.*?)(\/index)?"\)/g;
+
+function normalizeImportType(s: string) {
+	// Imports use file system running this command, so remove the node modules path.
+	return s.replaceAll(importRegex, 'import("$1")');
+}
 
 //#endregion

@@ -11,7 +11,7 @@
 		"build:release": "npm-run-all vite",
 		"test:debug": "npm-run-all vitest",
 		"test:release": "npm-run-all tsc biome:check vitest",
-		"clean": "shx rm -rf artifacts",
+		"clean": "shx rm -rf artifacts website/public/kendo-docs",
 		"—————————————————————— Specific tools ——————————————————————": "",
 		"—————————————————————————— biome ———————————————————————————": "",
 		"biome:fix": "biome check --write --unsafe --staged",

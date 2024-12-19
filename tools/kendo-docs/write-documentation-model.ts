@@ -13,7 +13,8 @@ export function writeDocumentationModel(
 	});
 
 	file.addExportAssignment({
-		expression: JSON.stringify(documentationDictionary, null, 2),
+		// Stringify with no spaces. If you want to examine the output, you can format it in your IDE.
+		expression: JSON.stringify(documentationDictionary),
 		isExportEquals: false, // export default because we lazy import
 	});
 
