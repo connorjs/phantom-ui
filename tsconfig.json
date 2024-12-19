@@ -5,7 +5,7 @@
 		"outDir": "./artifacts/tsc",
 		"paths": {
 			"~/ui/*": ["./ui/src/*"],
-			"~/*": ["./website/src/*"]
+			"~/*": ["./website/src/*", "./website/generated-src/*"]
 		}
 	},
 	"include": ["*.ts", "ui", "website"]
