@@ -1,4 +1,5 @@
 # Repository-driven (keep it limited to exactly what is needed)
+.react-router/
 artifacts/
 dist/
 generated-src/

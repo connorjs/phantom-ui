@@ -41,8 +41,6 @@
 				// Improve code readability.
 				// Even in React code, where many argue it helps, using guard blocks yields easier-to-read code.
 				"noNestedTernary": "error",
-				// General application code should not access env variable directly.
-				"noProcessEnv": "error",
 				// Accessibility.
 				"noStaticElementInteractions": "error",
 				// JS best practice.
@@ -79,6 +77,18 @@
 		}
 	},
 	"overrides": [
+		{
+			// Route modules have specific rules, so we relax some rules
+			"include": ["**/src/root.tsx", "**/src/routes.tsx", "**/src/routes/**/*"],
+			"linter": {
+				"rules": {
+					"style": {
+						// Route modules require default exports
+						"noDefaultExport": "off"
+					}
+				}
+			}
+		},
 		{
 			"include": ["**/*.config.ts"],
 			"linter": {
