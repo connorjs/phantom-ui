@@ -1,3 +1,4 @@
+/* c8 ignore start -- I will add unit tests once the code settles. */
 import { Loader } from "@progress/kendo-react-indicators";
 import {
 	Card,
@@ -8,7 +9,6 @@ import {
 } from "@progress/kendo-react-layout";
 import { useEffect, useState } from "react";
 
-/* c8 ignore start -- I will add unit tests once the code settles. */
 export function LoaderPage() {
 	const [data, setData] = useState(undefined);
 

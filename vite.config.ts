@@ -1,6 +1,6 @@
 import path from "node:path";
+import { reactRouter } from "@react-router/dev/vite";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
-import react from "@vitejs/plugin-react-swc";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
 
@@ -27,9 +27,11 @@ export default defineConfig({
 		},
 	},
 
-	plugins: [vanillaExtractPlugin(), react(), tsconfigPaths()],
-
-	root: "website",
+	plugins: [
+		vanillaExtractPlugin(),
+		process.env.NODE_ENV !== "test" && reactRouter(),
+		tsconfigPaths(),
+	],
 
 	test: {
 		environmentMatchGlobs: [["**/*.tsx", "happy-dom"]],
@@ -44,14 +46,22 @@ export default defineConfig({
 			],
 		],
 
-		setupFiles: ["./vitest-setup.ts"],
+		setupFiles: ["website/vitest-setup.ts"],
 
 		coverage: {
-			include: ["**/src"],
+			include: ["website/src"],
+			exclude: [
+				// React router files
+				"**/src/entry.client.tsx",
+				"**/src/root.tsx",
+				"**/src/routes.tsx",
+				"**/src/routes",
+			],
 
 			reporter: [
 				["cobertura", { file: "cobertura.xml" }],
 				["html", { subdir: "html" }],
+				["text-summary"],
 			],
 			reportsDirectory: path.join(artifacts, "coverage"),
 
@@ -64,3 +74,14 @@ export default defineConfig({
 		},
 	},
 });
+
+declare global {
+	// biome-ignore lint/style/noNamespace: External typing
+	// biome-ignore lint/style/useNamingConvention: External name
+	namespace NodeJS {
+		interface ProcessEnv {
+			// biome-ignore lint/style/useNamingConvention: External name
+			NODE_ENV: "development" | "production" | "test";
+		}
+	}
+}
