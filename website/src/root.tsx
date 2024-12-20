@@ -3,6 +3,11 @@ import "~/ui/global.scss";
 import type { ReactNode } from "react";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import { Shell } from "~/shell/shell.tsx";
+import { initializePhantomUi } from "~/ui/initialize/initialize.ts";
+
+if (typeof document !== "undefined") {
+	initializePhantomUi();
+}
 
 export default function Root() {
 	return (
