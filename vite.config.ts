@@ -54,7 +54,7 @@ export default defineConfig({
 				// React router files
 				"**/src/entry.client.tsx",
 				"**/src/root.tsx",
-				"**/src/routes.tsx",
+				"**/src/routes.ts",
 				"**/src/routes",
 			],
 

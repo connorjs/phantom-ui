@@ -8,12 +8,16 @@ $monospace-font-family: ("JetBrains Mono", monospace, "Segoe UI Symbol", "Apple 
 	// Configure font family
 	$kendo-font-family: $regular-font-family,
 	$kendo-font-family-monospace: $monospace-font-family,
-	
+
 	// Use it for the specific variables (I do not know why Kendo has `sans` and `sans-serif` variables)
 	$kendo-font-family-sans: $regular-font-family,
 	$kendo-font-family-serif: $regular-font-family,
 	$kendo-font-family-sans-serif: $regular-font-family,
 );
+
+:root {
+	color-scheme: dark;
+}
 
 // Italicize placeholders
 input::placeholder,

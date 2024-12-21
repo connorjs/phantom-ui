@@ -1,5 +1,5 @@
 import { LoaderPage } from "~/components/loader/loader-page.tsx";
 
-export default function Home() {
+export default function Loader() {
 	return <LoaderPage />;
 }
