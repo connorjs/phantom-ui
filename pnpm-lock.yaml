@@ -32,6 +32,9 @@ importers:
       '@progress/kendo-theme-default':
         specifier: 10.0.1
         version: 10.0.1
+      '@react-router/fs-routes':
+        specifier: ^7.1.0
+        version: 7.1.0(@react-router/dev@7.1.0(@types/node@22.10.2)(react-router@7.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(sass-embedded@1.83.0)(typescript@5.6.3)(vite@5.4.11(@types/node@22.10.2)(sass-embedded@1.83.0)))(typescript@5.6.3)
       '@react-router/node':
         specifier: ^7.1.0
         version: 7.1.0(react-router@7.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(typescript@5.6.3)
@@ -829,6 +832,16 @@ packages:
       typescript:
         optional: true
       wrangler:
+        optional: true
+
+  '@react-router/fs-routes@7.1.0':
+    resolution: {integrity: sha512-4/0Q9/2wXbSW28pKn+iAM6kGVnwODY2p2NCkM9/h3pp5fp4SPxdYgsNRtesDgM2PISTaptbpe8acK6O2Tww9eg==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      '@react-router/dev': ^7.1.0
+      typescript: ^5.1.0
+    peerDependenciesMeta:
+      typescript:
         optional: true
 
   '@react-router/node@7.1.0':
@@ -3304,6 +3317,13 @@ snapshots:
       - sugarss
       - supports-color
       - terser
+
+  '@react-router/fs-routes@7.1.0(@react-router/dev@7.1.0(@types/node@22.10.2)(react-router@7.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(sass-embedded@1.83.0)(typescript@5.6.3)(vite@5.4.11(@types/node@22.10.2)(sass-embedded@1.83.0)))(typescript@5.6.3)':
+    dependencies:
+      '@react-router/dev': 7.1.0(@types/node@22.10.2)(react-router@7.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(sass-embedded@1.83.0)(typescript@5.6.3)(vite@5.4.11(@types/node@22.10.2)(sass-embedded@1.83.0))
+      minimatch: 9.0.5
+    optionalDependencies:
+      typescript: 5.6.3
 
   '@react-router/node@7.1.0(react-router@7.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(typescript@5.6.3)':
     dependencies:

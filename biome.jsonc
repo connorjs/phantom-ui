@@ -79,7 +79,7 @@
 	"overrides": [
 		{
 			// Route modules have specific rules, so we relax some rules
-			"include": ["**/src/root.tsx", "**/src/routes.tsx", "**/src/routes/**/*"],
+			"include": ["**/src/root.tsx", "**/src/routes.ts", "**/src/routes/**/*"],
 			"linter": {
 				"rules": {
 					"style": {
