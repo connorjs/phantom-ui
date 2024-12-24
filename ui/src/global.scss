@@ -1,23 +1,36 @@
-$regular-font-family: ("Nunito Sans", Roboto, Arial, sans-serif, "Segoe UI Symbol", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji");
-$monospace-font-family: ("JetBrains Mono", monospace, "Segoe UI Symbol", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji");
+// Import our overrides, which are each organized into files matching Kendo foundation names.
+@use "./theme/typography" as *;
 
-@use "@progress/kendo-theme-default/dist/default-main-dark" as * with (
-	// Enable Kendo typography
-	$kendo-enable-typography: true,
+// Import Kendo styles, passing our overrides (1:1 mapping).
+@use "@progress/kendo-theme-default/scss/index" as * with (
+		//#region Typography
+		$kendo-enable-typography: true,
 
-	// Configure font family
-	$kendo-font-family: $regular-font-family,
-	$kendo-font-family-monospace: $monospace-font-family,
+		$kendo-font-size: $kendo-font-size,
+		$kendo-font-size-xxs: $kendo-font-size-xxs,
+		$kendo-font-size-xs: $kendo-font-size-xs,
+		$kendo-font-size-sm: $kendo-font-size-sm,
+		$kendo-font-size-md: $kendo-font-size-md,
+		$kendo-font-size-lg: $kendo-font-size-lg,
+		$kendo-font-size-xl: $kendo-font-size-xl,
 
-	// Use it for the specific variables (I do not know why Kendo has `sans` and `sans-serif` variables)
-	$kendo-font-family-sans: $regular-font-family,
-	$kendo-font-family-serif: $regular-font-family,
-	$kendo-font-family-sans-serif: $regular-font-family,
-);
+		$kendo-line-height: $kendo-line-height,
+		$kendo-line-height-xs: $kendo-line-height-xs,
+		$kendo-line-height-sm: $kendo-line-height-sm,
+		$kendo-line-height-md: $kendo-line-height-md,
+		$kendo-line-height-lg: $kendo-line-height-lg,
+		$kendo-line-height-em: $kendo-line-height-em,
 
-:root {
-	color-scheme: dark;
-}
+		$kendo-font-family-sans: $kendo-font-family-sans,
+		$kendo-font-family-serif: $kendo-font-family-serif,
+		$kendo-font-family-sans-serif: $kendo-font-family-sans-serif,
+		$kendo-font-family-monospace: $kendo-font-family-monospace,
+		$kendo-font-family: $kendo-font-family,
+		//#endregion
+	);
+
+// Actually include the Kendo styles.
+@include kendo-theme--styles();
 
 // Italicize placeholders
 input::placeholder,

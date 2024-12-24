@@ -1,0 +1,64 @@
+// https://github.com/telerik/kendo-themes/blob/develop/packages/core/scss/typography/index.import.scss
+
+@use "sass:math";
+
+/// The base font size across all components.
+/// @group typography
+$kendo-font-size: math.div(14rem, 16);
+/// The extra extra small font size across all components.
+/// @group typography
+$kendo-font-size-xxs: $kendo-font-size;
+/// The extra small font size across all components.
+/// @group typography
+$kendo-font-size-xs: $kendo-font-size;
+/// The small font size across all components.
+/// @group typography
+$kendo-font-size-sm: $kendo-font-size;
+/// The medium font size across all components.
+/// @group typography
+$kendo-font-size-md: $kendo-font-size;
+/// The large font size across all components.
+/// @group typography
+$kendo-font-size-lg: $kendo-font-size;
+/// The extra large font size across all components.
+/// @group typography
+$kendo-font-size-xl: $kendo-font-size;
+
+/// The base line height across all components.
+/// @group typography
+$kendo-line-height: math.div(20, 14);
+/// The extra small line height across all components.
+/// @group typography
+$kendo-line-height-xs: $kendo-line-height;
+/// The small line height across all components.
+/// @group typography
+$kendo-line-height-sm: $kendo-line-height;
+/// The medium line height across all components.
+/// @group typography
+$kendo-line-height-md: $kendo-line-height;
+/// The large line height across all components.
+/// @group typography
+$kendo-line-height-lg: $kendo-line-height;
+/// The base line height in ems across all components.
+/// @group typography
+$kendo-line-height-em: math.div(20em, 14);
+
+// Custom helper variable
+$_emoji-font-family: "Segoe UI Symbol", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+
+/// The base font family across all components.
+/// @group typography
+$kendo-font-family: "Nunito Sans", sans-serif, $_emoji-font-family;
+
+/// The sans font family across all components.
+/// @group typography
+$kendo-font-family-sans: $kendo-font-family;
+/// The serif font family across all components.
+/// @group typography
+$kendo-font-family-serif: $kendo-font-family;
+/// The sans-serif font family across all components.
+/// @group typography
+$kendo-font-family-sans-serif: $kendo-font-family;
+/// The monospace font family across all components.
+/// @group typography
+$kendo-font-family-monospace: "JetBrains Mono", monospace, $_emoji-font-family;
