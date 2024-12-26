@@ -1,5 +1,4 @@
 /* c8 ignore start -- I will add unit tests once the code settles. */
-import { Loader } from "@progress/kendo-react-indicators";
 import {
 	Card,
 	CardBody,
@@ -7,10 +6,12 @@ import {
 	CardTitle,
 	StackLayout,
 } from "@progress/kendo-react-layout";
+import type { JSX } from "react";
 
 export type ComponentsPageProps = {
 	componentName: string;
 	documentation: unknown;
+	example: JSX.Element;
 };
 
 export function ComponentPage(props: Readonly<ComponentsPageProps>) {
@@ -18,16 +19,13 @@ export function ComponentPage(props: Readonly<ComponentsPageProps>) {
 		<section>
 			<div>
 				<h2>{props.componentName}</h2>
-				<p>Description</p>
 			</div>
 			<StackLayout orientation="vertical" gap="var(--kendo-spacing-5)">
 				<Card>
 					<CardHeader>
 						<CardTitle>Example</CardTitle>
 					</CardHeader>
-					<CardBody>
-						<Loader />
-					</CardBody>
+					<CardBody>{props.example}</CardBody>
 				</Card>
 				<Card>
 					<CardHeader>

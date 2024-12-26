@@ -3,5 +3,11 @@ import { ComponentPage } from "~/components/component-page.tsx";
 import indicators from "~/kendo-docs/indicators.js";
 
 export default function Loader() {
-	return <ComponentPage componentName="Loader" documentation={indicators} />;
+	return (
+		<ComponentPage
+			componentName="Loader"
+			documentation={indicators}
+			example={<Loader />}
+		/>
+	);
 }
