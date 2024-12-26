@@ -84,7 +84,9 @@
 				"rules": {
 					"style": {
 						// Route modules require default exports
-						"noDefaultExport": "off"
+						"noDefaultExport": "off",
+						// Route modules may not adhere to kebab-case (example: `$.tsx`)
+						"useFilenamingConvention": "off"
 					}
 				}
 			}
