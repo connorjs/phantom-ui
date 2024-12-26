@@ -1,5 +1,7 @@
-import { LoaderPage } from "~/components/loader/loader-page.tsx";
+import { ComponentPage } from "~/components/component-page.tsx";
+// @ts-expect-error -- No typing for JS dynamic import.
+import indicators from "~/kendo-docs/indicators.js";
 
 export default function Loader() {
-	return <LoaderPage />;
+	return <ComponentPage componentName="Loader" documentation={indicators} />;
 }
