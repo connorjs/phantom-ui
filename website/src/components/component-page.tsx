@@ -1,3 +1,5 @@
+/* c8 ignore start -- I will add unit tests once the code settles. */
+
 import {
 	Card,
 	CardBody,
@@ -6,8 +8,6 @@ import {
 	StackLayout,
 } from "@progress/kendo-react-layout";
 import type { JSX } from "react";
-
-/* c8 ignore start -- I will add unit tests once the code settles. */
 
 export type ComponentsPageProps = {
 	componentName: string;
