@@ -8,6 +8,7 @@ export default function LoaderPage() {
 			componentName="Loader"
 			documentation={documentation}
 			example={<Loader />}
+			propsName="LoaderProps"
 		/>
 	);
 }

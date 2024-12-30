@@ -8,5 +8,5 @@
 			"~/*": ["./website/src/*", "./website/generated-src/*"]
 		}
 	},
-	"include": ["*.ts", "ui", "website"]
+	"include": ["*.ts", "tools", "ui", "website"]
 }
