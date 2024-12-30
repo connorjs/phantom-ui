@@ -8,39 +8,88 @@ import {
 	StackLayout,
 } from "@progress/kendo-react-layout";
 import type { JSX } from "react";
+import Markdown from "react-markdown";
+import { name, property } from "~/components/component-page.css.ts";
+import type { DocumentationDictionary } from "../../../tools/kendo-docs/types.ts";
 
-export type ComponentsPageProps = {
-	componentName: string;
-	documentation: unknown;
-	example: JSX.Element;
-};
-
-export function ComponentPage(props: Readonly<ComponentsPageProps>) {
+export function ComponentPage<
+	DocumentationT extends DocumentationDictionary,
+	PropsNameT extends keyof DocumentationT & `${string}Props`,
+>(
+	props: Readonly<{
+		componentName: string;
+		documentation: DocumentationT;
+		example: JSX.Element;
+		propsName: PropsNameT;
+	}>,
+) {
 	return (
 		<section>
 			<div>
-				<h2>{props.componentName}</h2>
+				<h1>{props.componentName}</h1>
 			</div>
 			<StackLayout orientation="vertical" gap="var(--kendo-spacing-5)">
-				<Card>
-					<CardHeader>
-						<CardTitle>Example</CardTitle>
-					</CardHeader>
-					<CardBody>{props.example}</CardBody>
-				</Card>
-				<Card>
-					<CardHeader>
-						<CardTitle>Documentation</CardTitle>
-					</CardHeader>
-					<CardBody>
-						<pre>
-							<code>{JSON.stringify(props.documentation, null, 2)}</code>
-						</pre>
-					</CardBody>
-				</Card>
+				<MyCard title="Example">{props.example}</MyCard>
+				<MyCard title="Documentation">
+					<PropsDocumentation
+						documentation={props.documentation}
+						propsName={props.propsName}
+					/>
+				</MyCard>
 			</StackLayout>
 		</section>
 	);
+}
+
+function MyCard(props: Readonly<{ title: string; children: JSX.Element }>) {
+	return (
+		<Card>
+			<CardHeader>
+				<CardTitle>{props.title}</CardTitle>
+			</CardHeader>
+			<CardBody>{props.children}</CardBody>
+		</Card>
+	);
+}
+
+function PropsDocumentation(
+	props: Readonly<{
+		documentation: DocumentationDictionary;
+		propsName: string;
+	}>,
+) {
+	// If the type is a type alias that is also in the documentation,
+	// then display the transitive type.
+	const displayType = (type: string) => {
+		const found = props.documentation[type];
+		return found && "type" in found ? found.type : type;
+	};
+
+	const propsDocumentation = props.documentation[props.propsName];
+	const properties =
+		propsDocumentation &&
+		"properties" in propsDocumentation &&
+		propsDocumentation.properties;
+
+	if (!properties) {
+		return undefined;
+	}
+
+	return properties.map((documentProperty) => (
+		<div key={documentProperty.name} className={property}>
+			<div>
+				<span className={name}>{documentProperty.name}</span>
+				<code>{displayType(documentProperty.type)}</code>
+			</div>
+			<div>
+				{documentProperty.description ? (
+					<Markdown>{documentProperty.description}</Markdown>
+				) : (
+					"-"
+				)}
+			</div>
+		</div>
+	));
 }
 
 /* c8 ignore stop -- END */
