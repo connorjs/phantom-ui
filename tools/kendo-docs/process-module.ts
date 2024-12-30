@@ -8,11 +8,12 @@ import { isTypeNode } from "./types.ts";
  */
 export function processSourceFile(
 	sourceFile: SourceFile,
+	moduleName: string,
 ): DocumentationDictionary {
 	const exports: DocumentationDictionary = {};
 	sourceFile.forEachDescendant((node) => {
 		if (isTypeNode(node)) {
-			exports[node.getName()] = translateType(node);
+			exports[node.getName()] = translateType(node, moduleName);
 		}
 	});
 	return exports;

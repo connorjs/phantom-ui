@@ -9,11 +9,11 @@ export function writeDocumentationModel(
 ): Promise<void> {
 	const file = project.createSourceFile(pathToWrite, "", {
 		overwrite: true,
-		scriptKind: ts.ScriptKind.JS,
+		scriptKind: ts.ScriptKind.TS,
 	});
 
 	file.addExportAssignment({
-		// Stringify with no spaces. If you want to examine the output, you can format it in your IDE.
+		// Just stringify it. The `post` script will format. The bundler will minify.
 		expression: JSON.stringify(documentationDictionary),
 		isExportEquals: false, // export default because we lazy import
 	});

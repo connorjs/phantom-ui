@@ -17,22 +17,19 @@ const destinationRoot = path.join(
 	"kendo-docs",
 );
 
-// Create a project with no configuration
-const project = new Project();
+// Create an empty project
+const project = new Project({
+	skipAddingFilesFromTsConfig: true,
+});
 
 // Add our Kendo packages.
-const moduleNames = ["indicators"];
+const moduleNames = ["kendo-react-indicators"];
 const sourceFiles = moduleNames.map(
 	(moduleName) =>
 		[
 			moduleName,
 			project.addSourceFileAtPath(
-				path.join(
-					nodeModulesRoot,
-					"@progress",
-					`kendo-react-${moduleName}`,
-					"index.d.mts",
-				),
+				path.join(nodeModulesRoot, "@progress", moduleName, "index.d.mts"),
 			),
 		] as const,
 );
@@ -40,7 +37,7 @@ const sourceFiles = moduleNames.map(
 // Process each file
 const documentationDictionaries = sourceFiles.map(
 	([moduleName, sourceFile]) =>
-		[moduleName, processSourceFile(sourceFile)] as const,
+		[moduleName, processSourceFile(sourceFile, moduleName)] as const,
 );
 
 // Write each file
@@ -48,7 +45,7 @@ await Promise.all(
 	documentationDictionaries.map(([moduleName, documentationDictionary]) =>
 		writeDocumentationModel(
 			project,
-			path.join(destinationRoot, `${moduleName}.js`),
+			path.join(destinationRoot, `${moduleName}.ts`),
 			documentationDictionary,
 		),
 	),

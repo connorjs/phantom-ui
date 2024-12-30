@@ -5,13 +5,19 @@ import type { DocumentedProperty, DocumentedType, TypeNode } from "./types.ts";
 /**
  * Maps the `ts-morph` AST to our documented node.
  */
-export function translateType(node: TypeNode): DocumentedType {
+export function translateType(
+	node: TypeNode,
+	moduleName: string,
+): DocumentedType {
 	// Get the required fields
 	const name = node.getName();
 	const description = extractJsDoc(node);
 
 	// Analyze children nodes to determine union type or get properties.
-	const propertyNodesOrUnionType = getPropertyNodesOrUnionType(node);
+	const propertyNodesOrUnionType = getPropertyNodesOrUnionType(
+		node,
+		moduleName,
+	);
 
 	if (!propertyNodesOrUnionType) {
 		// This should not happen because of higher up processing, but just pass for now.
@@ -26,20 +32,23 @@ export function translateType(node: TypeNode): DocumentedType {
 
 	// Interface or type literal
 	const properties = propertyNodesOrUnionType.map((property) =>
-		translateProperty(property),
+		translateProperty(property, moduleName),
 	);
 	return { name, description, properties };
 }
 
-function translateProperty(property: PropertySignature): DocumentedProperty {
+function translateProperty(
+	property: PropertySignature,
+	moduleName: string,
+): DocumentedProperty {
 	return {
 		name: property.getName(),
 		description: extractJsDoc(property),
-		type: getType(property),
+		type: getType(property, moduleName),
 	} satisfies DocumentedProperty;
 }
 
-function getPropertyNodesOrUnionType(node: TypeNode) {
+function getPropertyNodesOrUnionType(node: TypeNode, moduleName: string) {
 	if (Node.isInterfaceDeclaration(node)) {
 		// Interfaces have properties directly
 		return node.getProperties();
@@ -56,7 +65,7 @@ function getPropertyNodesOrUnionType(node: TypeNode) {
 				// But we still want the union type.
 				return child
 					.getTypeNodes()
-					.map((node) => getType(node))
+					.map((node) => getType(node, moduleName))
 					.join(" | ")
 					.replaceAll("'", '"');
 			}
@@ -90,9 +99,9 @@ function normalizeJsDoc(s: string) {
 
 //#region Type extraction and transforms
 
-function getType(node: Node) {
+function getType(node: Node, moduleName: string) {
 	const rawType = node.getType().getText();
-	return normalizeImportType(rawType);
+	return removeSelfImport(normalizeImportType(rawType), moduleName);
 }
 
 // RegExp for the import syntax. If the import ends in `index` also remove that.
@@ -101,6 +110,10 @@ const importRegex = /import\(".*?node_modules\/(.*?)(\/index)?"\)/g;
 function normalizeImportType(s: string) {
 	// Imports use file system running this command, so remove the node modules path.
 	return s.replaceAll(importRegex, 'import("$1")');
+}
+
+function removeSelfImport(s: string, moduleName: string) {
+	return s.replaceAll(`import("@progress/${moduleName}").`, "");
 }
 
 //#endregion
