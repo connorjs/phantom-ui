@@ -1,4 +1,5 @@
 /* c8 ignore start -- I will add unit tests once the code settles. */
+
 import {
 	Card,
 	CardBody,
@@ -35,11 +36,11 @@ export function ComponentPage(props: Readonly<ComponentsPageProps>) {
 						<pre>
 							<code>{JSON.stringify(props.documentation, null, 2)}</code>
 						</pre>
-						)
 					</CardBody>
 				</Card>
 			</StackLayout>
 		</section>
 	);
 }
+
 /* c8 ignore stop -- END */
